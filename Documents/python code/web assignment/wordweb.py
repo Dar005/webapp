@@ -25,7 +25,6 @@ def running():
 
 @app.route('/winner')
 def winner():
-    source = word_utils.get_source_word()
     return render_template('winner.html',
                            the_tilte = 'Winner.')
 
