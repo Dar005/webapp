@@ -1,3 +1,6 @@
+# Student Name:     Darran Gahan
+# Student Number:   C00098391
+
 from flask import Flask, render_template, request, session, redirect
 import word_utils
 import data_utils
