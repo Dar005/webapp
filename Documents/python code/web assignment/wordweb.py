@@ -6,10 +6,11 @@ from wordgame import check_words
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return render_template('index.html',
-                           the_title = 'WordGame.')
+                           the_title='WordGame.')
 
 
 @app.route('/running')
@@ -22,8 +23,8 @@ def running():
     session['start_time'] = time.perf_counter()
 
     return render_template('running.html',
-                           the_title = 'WordGame',
-                           sourceword = sourceword)
+                           the_title='WordGame',
+                           sourceword=sourceword)
 
 
 @app.route('/processwords', methods=['GET', 'POST'])
@@ -36,35 +37,34 @@ def word_process():
         winner, words = check_words(session.get('sourceword'), user_input)
         session['winner'] = winner
         if winner:
-            ## if user wins
+            # if user wins
             session['time_taken'] = session['end_time'] - session['start_time']
             final_time = round(session['time_taken'], 2)
             session['final_time'] = final_time
             return render_template('winner.html',
-                                   time_taken = session['time_taken'],
-                                   final_time = final_time,
-                                   the_title = 'Winner')
-
+                                   time_taken=session['time_taken'],
+                                   final_time=final_time,
+                                   the_title='Winner')
         return render_template('loser.html',
-                               ## if user loses
-                             the_tilte = 'user info',
-                             sourceword = session.get('sourceword'),
-                             user_input = user_input,
-                             words = words,
-                             the_title = 'Wordgame')
+                               # if user loses
+                               the_tilte='WordGame',
+                               sourceword=session.get('sourceword'),
+                               user_input=user_input,
+                               words=words, )
 
 
-@app.route('/addwinner', methods=['GET','POST'])
+@app.route('/addwinner', methods=['GET', 'POST'])
 def add_winner():
     if request.method == 'POST':
         if session.get('winner'):
-            data_utils.add_to_scores(request.form.get('user_name'), session.get('final_time'))
+            data_utils.add_to_scores(request.form.get('user_name'),
+                                     session.get('final_time'))
             session['winner'] = False
             session['time_taken'] = False
             leaderboard = data_utils.get_sorted_leaderboard()[:10]
             return render_template('leaderboard.html',
-                                   leaderboard = leaderboard,
-                                   the_title = 'Wordgame')
+                                   the_title='WordGame',
+                                   leaderboard=leaderboard,)
         return redirect('/')
 
 
