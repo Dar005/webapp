@@ -4,10 +4,8 @@
 # email: paul.barry@itcarlow.ie
 
 import enchant
-import time
-import data_utils
 import word_utils
-from flask import request, session
+
 
 # Before we do anything else, pre-process the words, then
 # update our enchant dictionary.  We do this only ONCE.
@@ -77,7 +75,6 @@ def check_words(sourceword, seven_words):
         winner = False
         error = ('You cannot use the source word: ', [sourceword])
         errors.append(error)
-    word_utils.log_attempt(session['sourceword'], session['seven_words'], request)
     if winner:
         return (winner, [])
     return (winner, errors)

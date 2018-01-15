@@ -36,16 +36,6 @@ def get_source_word():
     return word.strip()  # Remove that pesky \n.
 
 
-def log_attempt(sourceword, words, request):
-    """Logs all attempts and stores the source word, input words,
-       ip and time of the requests and browser"""
-    with open('attempts.log', 'a') as logf:
-        print(str(request.user_agent), file=logf)
-        print(str(request.host), file=logf)
-        print(str(request.remote_addr), file=logf)
-
-
-
 def check_letters(sourceword, check_word):
     """Check one word (check_word) is "inside" another (source_word).
 

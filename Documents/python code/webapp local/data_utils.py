@@ -20,6 +20,7 @@ def add_to_scores(name, score, word, user_input):
     c = db['leaderboard']
     c.insert_one(score)
 
+
 def get_sorted_leaderboard():
     """Return a sorted list of tuples - this is the leaderboard."""
     client = pymongo.MongoClient()
